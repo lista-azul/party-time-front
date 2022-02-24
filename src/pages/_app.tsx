@@ -6,12 +6,20 @@ import { CacheProvider } from "@emotion/react";
 import Head from "next/head";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "src/styles/theme";
+import Layout from "../components/Layout";
+import React from "react";
 
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -20,7 +28,9 @@ function MyApp(props: any) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </CacheProvider>
   );
