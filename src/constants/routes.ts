@@ -1,3 +1,5 @@
 const HOME = `/`;
 const ABOUTUS = `/aboutus`;
-export default { HOME, ABOUTUS };
+const REGISTER = `/register`;
+const LOGIN = `/login`;
+export default { HOME, ABOUTUS, REGISTER, LOGIN };
