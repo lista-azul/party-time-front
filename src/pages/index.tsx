@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
+import SerchBar from "src/components/search";
+
 const Home: NextPage = () => {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xl">
       <Box
         sx={{ my: 4 }}
         style={{
@@ -20,6 +22,8 @@ const Home: NextPage = () => {
           Next.js example
         </Typography>
       </Box>
+
+      <SerchBar></SerchBar>
     </Container>
   );
 };
