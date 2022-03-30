@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import NavBar from "../NavBar";
+import {Container} from "@mui/material";
 interface propsLayout {
   children: any;
 }
@@ -9,7 +10,9 @@ const Layout = ({ children }: propsLayout) => {
       <header>
         <NavBar />
       </header>
-      {children}
+        <Container maxWidth={"xl"}>
+            {children}
+        </Container>
     </Fragment>
   );
 };
