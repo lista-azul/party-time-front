@@ -1,8 +1,5 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 import SerchBar from "src/components/search";
@@ -19,11 +16,11 @@ const Home: NextPage = () => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          Next.js example
+          Party-Time
         </Typography>
       </Box>
 
-      <SerchBar></SerchBar>
+      <SerchBar/>
     </div>
   );
 };
