@@ -9,7 +9,7 @@ import SerchBar from "src/components/search";
 
 const Home: NextPage = () => {
   return (
-    <Container maxWidth="xl">
+      <div className={styles.container}>
       <Box
         sx={{ my: 4 }}
         style={{
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
       </Box>
 
       <SerchBar></SerchBar>
-    </Container>
+    </div>
   );
 };
 
