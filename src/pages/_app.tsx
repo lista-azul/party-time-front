@@ -17,6 +17,7 @@ function MyApp(props: any) {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
+      // @ts-ignore
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
