@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
-          {this.props.emotionStyleTags}
+          {/*{this.props.emotionStyleTags}*/}
         </Head>
         <body>
           <Main />
@@ -32,6 +32,8 @@ MyDocument.getInitialProps = async (ctx) => {
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
+  const cache = createEmotionCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>
     originalRenderPage({
@@ -39,6 +41,16 @@ MyDocument.getInitialProps = async (ctx) => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  const emotionStyles = extractCriticalToChunks(initialProps.html);
+
+  const emotionStyleTags = emotionStyles.styles.map((style) => (
+      <style
+          data-emotion={`${style.key} ${style.ids.join(' ')}`}
+          key={style.key}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: style.css }}
+      />
+  ));
 
   return {
     ...initialProps,
@@ -46,6 +58,7 @@ MyDocument.getInitialProps = async (ctx) => {
     styles: [
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
+        ...emotionStyleTags
     ],
   };
   // const originalRenderPage = ctx.renderPage;
